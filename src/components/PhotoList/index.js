@@ -8,7 +8,7 @@ const PhotoList = ({ category }) => {
       name: 'Grocery aisle',
       category: 'commercial',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricie',
-    },    
+    },
     {
       name: 'Grocery booth',
       category: 'commercial',
@@ -103,12 +103,14 @@ const PhotoList = ({ category }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const currentPhotos = photos.filter((photo) => photo.category === category);
   const toggleModal = (image, i) => {
-    setCurrentPhoto({...image, index: i})
-    setIsModalOpen(true);
+    setCurrentPhoto({ ...image, index: i });
+    setIsModalOpen(!isModalOpen);
   }
   return (
     <div>
-      {isModalOpen && <Modal currentPhoto={currentPhoto} />}
+      {isModalOpen && (
+        <Modal currentPhoto={currentPhoto} onClose={toggleModal} />
+      )}
       <div className="flex-row">
         {currentPhotos.map((image, i) => (
           <img
